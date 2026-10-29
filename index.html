@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Struktur Kawalan Ulangan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Fredoka', cursive, sans-serif;
+      background: linear-gradient(-45deg, #ff9a9e, #fecfef, #a1c4fd, #c2e9fb);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .option-btn {
+      transition: all 0.2s ease-in-out;
+    }
+    .option-btn:hover:not(:disabled) {
+      transform: translateY(-2px) scale(1.01);
+    }
+    .option-btn:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body class="min-h-screen py-8 px-4 text-slate-800">
+
+  <div class="max-w-3xl mx-auto bg-white/90 backdrop-blur-md rounded-3xl shadow-2xl overflow-hidden border-4 border-white">
+    
+  
+
+    <!-- Tajuk Utama & Logo -->
+    <div class="bg-gradient-to-r from-amber-400 via-pink-500 to-purple-500 text-white p-6 sm:p-8 text-center relative flex flex-col items-center">
+      
+      <!-- Logo Cikgu Wi -->
+      <img src="logo.png" alt="Logo ASK Cikgu Wi" class="w-24 h-24 sm:w-28 sm:h-28 mb-3 drop-shadow-md rounded-full bg-white/20 p-1">
+      
+      <h1 class="text-3xl sm:text-4xl font-extrabold tracking-wide drop-shadow-md">
+        🎮 STRUKTUR KAWALAN ULANGAN 🎯
+      </h1>
+      <p class="text-white/90 text-base sm:text-lg mt-2 font-medium">
+        Jawab soalan, semak jawapan serta-merta & hantar keputusannya!
+      </p>
+      
+      <!-- Papan Skor Ringkas -->
+      <div class="mt-4 inline-block bg-white/20 backdrop-blur-md px-6 py-2 rounded-full font-bold text-lg">
+        Skor Semasa: <span id="scoreText" class="text-yellow-200 font-black text-2xl">0</span> / 10
+      </div>
+    </div>
+
+    <!-- Ruang Maklumat Murid -->
+    <div class="p-6 bg-amber-50 border-b-4 border-amber-200 space-y-4">
+      <h2 class="text-lg font-bold text-amber-900 flex items-center gap-2">
+        📝 Maklumat Pelajar (Wajib Diisi Sebelum Hantar):
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Nama Penuh:</label>
+          <input type="text" id="studentName" placeholder="Contoh: Muhammad Ali" class="w-full p-3 rounded-xl border-2 border-amber-300 focus:border-amber-500 focus:outline-none font-sans">
+        </div>
+        <div>
+          <label class="block text-sm font-bold text-slate-700 mb-1">Kelas:</label>
+          <input type="text" id="studentClass" placeholder="Contoh: 1 BESTARI" class="w-full p-3 rounded-xl border-2 border-amber-300 focus:border-amber-500 focus:outline-none font-sans">
+        </div>
+      </div>
+    </div>
+
+    <!-- Soalan-soalan -->
+    <div class="p-6 sm:p-8 space-y-8">
+      
+      <!-- Soalan 1 -->
+      <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 border-2 border-indigo-100 shadow-sm space-y-4">
+        <span class="inline-block px-3 py-1 bg-indigo-500 text-white text-xs font-bold rounded-full">Soalan 1</span>
+        <p class="font-bold text-lg text-slate-800">Apakah perbezaan utama antara struktur kawalan <code class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded">FOR</code> dan <code class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded">WHILE</code>?</p>
+        
+        <div class="grid grid-cols-1 gap-3">
+          <button onclick="checkInstant('q1', 'A')" class="btn-q1 option-btn text-left flex items-center gap-3 p-3.5 rounded-xl bg-rose-100 border-2 border-rose-300 text-rose-900 font-medium"><span>FOR hanya untuk nombor genap, WHILE untuk nombor ganjil.</span></button>
+          <button onclick="checkInstant('q1', 'B')" class="btn-q1 option-btn text-left flex items-center gap-3 p-3.5 rounded-xl bg-amber-100 border-2 border-amber-300 text-amber-900 font-medium"><span>FOR untuk bilangan diketahui, WHILE untuk bilangan tidak diketahui.</span></button>
+          <button onclick="checkInstant('q1', 'C')" class="btn-q1 option-btn text-left flex items-center gap-3 p-3.5 rounded-xl bg-emerald-100 border-2 border-emerald-300 text-emerald-900 font-medium"><span>FOR semak syarat di akhir, WHILE semak syarat di awal.</span></button>
+          <button onclick="checkInstant('q1', 'D')" class="btn-q1 option-btn text-left flex items-center gap-3 p-3.5 rounded-xl bg-sky-100 border-2 border-sky-300 text-sky-900 font-medium"><span>FOR tidak perlukan pemboleh ubah, WHILE perlukan pemboleh ubah.</span></button>
+        </div>
+        <div id="fb-q1" class="hidden p-4 rounded-xl text-sm font-sans space-y-2"></div>
+      </div>
+
+      <!-- Soalan 2 -->
+      <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 border-2 border-indigo-100 shadow-sm space-y-4">
+        <span class="inline-block px-3 py-1 bg-indigo-500 text-white text-xs font-bold rounded-full">Soalan 2</span>
+        <p class="font-bold text-lg text-slate-800">Apakah ciri khas bagi struktur kawalan ulangan <code class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded">REPEAT-UNTIL</code>?</p>
+        
+        <div class="grid grid-cols-1 gap-3">
+          <button onclick="checkInstant('q2', 'A')" class="btn-q2 option-btn text-left flex items-center gap-3 p-3.5 rounded-xl bg-emerald-100 border-2 border-emerald-300 text-emerald-900 font-medium"><span>Arahan di dalam gelung dilaksanakan sekurang-kurangnya sekali.</span></button>
+          <button onclick="checkInstant('q2', 'B')" class="btn-q2 option-btn text-left flex items-center gap-3 p-3.5 rounded-xl bg-rose-100 border-2 border-rose-300 text-rose-900 font-medium"><span>Syarat dipastikan TRUE sebelum arahan dijalankan.</span></button>
+          <button onclick="checkInstant('q2', 'C')" class="btn-q2 option-btn text-left flex items-center gap-3 p-3.5 rounded-xl bg-sky-100 border-2 border-sky-300 text-sky-900 font-medium"><span>Gelung terus berjalan apabila syarat menjadi TRUE.</span></button>
+          <button onclick="checkInstant('q2', 'D')" class="btn-q2 option-btn text-left flex items-center gap-3 p-3.5 rounded-xl bg-amber-100 border-2 border-amber-300 text-amber-900 font-medium"><span>Tidak memerlukan sebarang pemboleh ubah pembilang.</span></button>
+        </div>
+        <div id="fb-q2" class="hidden p-4 rounded-xl text-sm font-sans space-y-2"></div>
+      </div>
+
+      <!-- Soalan 3 -->
+      <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 border-2 border-indigo-100 shadow-sm space-y-4">
+        <span class="inline-block px-3 py-1 bg-indigo-500 text-white text-xs font-bold rounded-full">Soalan 3</span>
+        <p class="font-bold text-lg text-slate-800">Teliti pseudokod di bawah:</p>
+        <pre class="bg-slate-900 text-emerald-400 p-4 rounded-xl text-sm font-mono">SET k = 1
+WHILE k <= 3
+   CETAK "Malaysia"
+   SET k = k + 1
+TAMAT WHILE</pre>
+        <p class="font-bold text-slate-800">Berapakah bilangan kali perkataan "Malaysia" akan dicetak?</p>
+
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="checkInstant('q3', 'A')" class="btn-q3 option-btn text-left p-3.5 rounded-xl bg-sky-100 border-2 border-sky-300 text-sky-900 font-medium">2 kali</button>
+          <button onclick="checkInstant('q3', 'B')" class="btn-q3 option-btn text-left p-3.5 rounded-xl bg-emerald-100 border-2 border-emerald-300 text-emerald-900 font-medium">3 kali</button>
+          <button onclick="checkInstant('q3', 'C')" class="btn-q3 option-btn text-left p-3.5 rounded-xl bg-amber-100 border-2 border-amber-300 text-amber-900 font-medium">4 kali</button>
+          <button onclick="checkInstant('q3', 'D')" class="btn-q3 option-btn text-left p-3.5 rounded-xl bg-rose-100 border-2 border-rose-300 text-rose-900 font-medium">5 kali</button>
+        </div>
+        <div id="fb-q3" class="hidden p-4 rounded-xl text-sm font-sans space-y-2"></div>
+      </div>
+
+      <!-- Soalan 4 -->
+      <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 border-2 border-indigo-100 shadow-sm space-y-4">
+        <span class="inline-block px-3 py-1 bg-indigo-500 text-white text-xs font-bold rounded-full">Soalan 4</span>
+        <p class="font-bold text-lg text-slate-800">Perhatikan pseudokod gelung <code class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded">FOR</code> berikut:</p>
+        <pre class="bg-slate-900 text-emerald-400 p-4 rounded-xl text-sm font-mono">FOR x = 10 HINGGA 14
+   CETAK "Ujian"
+NEXT x</pre>
+        <p class="font-bold text-slate-800">Berapakah jumlah cetakan perkataan "Ujian" yang dihasilkan?</p>
+
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="checkInstant('q4', 'A')" class="btn-q4 option-btn text-left p-3.5 rounded-xl bg-rose-100 border-2 border-rose-300 text-rose-900 font-medium">4 kali</button>
+          <button onclick="checkInstant('q4', 'B')" class="btn-q4 option-btn text-left p-3.5 rounded-xl bg-emerald-100 border-2 border-emerald-300 text-emerald-900 font-medium">5 kali</button>
+          <button onclick="checkInstant('q4', 'C')" class="btn-q4 option-btn text-left p-3.5 rounded-xl bg-sky-100 border-2 border-sky-300 text-sky-900 font-medium">6 kali</button>
+          <button onclick="checkInstant('q4', 'D')" class="btn-q4 option-btn text-left p-3.5 rounded-xl bg-amber-100 border-2 border-amber-300 text-amber-900 font-medium">14 kali</button>
+        </div>
+        <div id="fb-q4" class="hidden p-4 rounded-xl text-sm font-sans space-y-2"></div>
+      </div>
+
+      <!-- Soalan 5 -->
+      <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 border-2 border-indigo-100 shadow-sm space-y-4">
+        <span class="inline-block px-3 py-1 bg-indigo-500 text-white text-xs font-bold rounded-full">Soalan 5</span>
+        <p class="font-bold text-lg text-slate-800">Teliti pseudokod di bawah:</p>
+        <pre class="bg-slate-900 text-emerald-400 p-4 rounded-xl text-sm font-mono">SET nombor = 2
+WHILE nombor <= 6
+   CETAK nombor
+   SET nombor = nombor + 2
+TAMAT WHILE</pre>
+        <p class="font-bold text-slate-800">Apakah output yang akan dipaparkan pada skrin?</p>
+
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="checkInstant('q5', 'A')" class="btn-q5 option-btn text-left p-3.5 rounded-xl bg-rose-100 border-2 border-rose-300 text-rose-900 font-medium">2, 4</button>
+          <button onclick="checkInstant('q5', 'B')" class="btn-q5 option-btn text-left p-3.5 rounded-xl bg-emerald-100 border-2 border-emerald-300 text-emerald-900 font-medium">2, 4, 6</button>
+          <button onclick="checkInstant('q5', 'C')" class="btn-q5 option-btn text-left p-3.5 rounded-xl bg-sky-100 border-2 border-sky-300 text-sky-900 font-medium">2, 4, 6, 8</button>
+          <button onclick="checkInstant('q5', 'D')" class="btn-q5 option-btn text-left p-3.5 rounded-xl bg-amber-100 border-2 border-amber-300 text-amber-900 font-medium">4, 6, 8</button>
+        </div>
+        <div id="fb-q5" class="hidden p-4 rounded-xl text-sm font-sans space-y-2"></div>
+      </div>
+
+      <!-- Soalan 6 -->
+      <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 border-2 border-indigo-100 shadow-sm space-y-4">
+        <span class="inline-block px-3 py-1 bg-indigo-500 text-white text-xs font-bold rounded-full">Soalan 6</span>
+        <p class="font-bold text-lg text-slate-800">Situasi manakah PALING SESUAI menggunakan struktur kawalan <code class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded">WHILE</code>?</p>
+
+        <div class="grid grid-cols-1 gap-3">
+          <button onclick="checkInstant('q6', 'A')" class="btn-q6 option-btn text-left p-3.5 rounded-xl bg-amber-100 border-2 border-amber-300 text-amber-900 font-medium">Memaparkan sifir 5 dari 1 hingga 10.</button>
+          <button onclick="checkInstant('q6', 'B')" class="btn-q6 option-btn text-left p-3.5 rounded-xl bg-rose-100 border-2 border-rose-300 text-rose-900 font-medium">Mencetak surat khabar sebanyak 100 naskhah.</button>
+          <button onclick="checkInstant('q6', 'C')" class="btn-q6 option-btn text-left p-3.5 rounded-xl bg-emerald-100 border-2 border-emerald-300 text-emerald-900 font-medium">Meminta pengguna memasukkan kata laluan sehingga betul.</button>
+          <button onclick="checkInstant('q6', 'D')" class="btn-q6 option-btn text-left p-3.5 rounded-xl bg-sky-100 border-2 border-sky-300 text-sky-900 font-medium">Mengira bilangan hari dalam seminggu.</button>
+        </div>
+        <div id="fb-q6" class="hidden p-4 rounded-xl text-sm font-sans space-y-2"></div>
+      </div>
+
+      <!-- Soalan 7 -->
+      <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 border-2 border-indigo-100 shadow-sm space-y-4">
+        <span class="inline-block px-3 py-1 bg-indigo-500 text-white text-xs font-bold rounded-full">Soalan 7</span>
+        <p class="font-bold text-lg text-slate-800">Perhatikan pseudokod berikut:</p>
+        <pre class="bg-slate-900 text-emerald-400 p-4 rounded-xl text-sm font-mono">SET bil = 5
+REPEAT
+   CETAK bil
+   SET bil = bil - 1
+UNTIL bil < 3</pre>
+        <p class="font-bold text-slate-800">Apakah output yang akan dipaparkan?</p>
+
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="checkInstant('q7', 'A')" class="btn-q7 option-btn text-left p-3.5 rounded-xl bg-rose-100 border-2 border-rose-300 text-rose-900 font-medium">5, 4, 3, 2</button>
+          <button onclick="checkInstant('q7', 'B')" class="btn-q7 option-btn text-left p-3.5 rounded-xl bg-emerald-100 border-2 border-emerald-300 text-emerald-900 font-medium">5, 4, 3</button>
+          <button onclick="checkInstant('q7', 'C')" class="btn-q7 option-btn text-left p-3.5 rounded-xl bg-sky-100 border-2 border-sky-300 text-sky-900 font-medium">5, 4</button>
+          <button onclick="checkInstant('q7', 'D')" class="btn-q7 option-btn text-left p-3.5 rounded-xl bg-amber-100 border-2 border-amber-300 text-amber-900 font-medium">4, 3, 2</button>
+        </div>
+        <div id="fb-q7" class="hidden p-4 rounded-xl text-sm font-sans space-y-2"></div>
+      </div>
+
+      <!-- Soalan 8 -->
+      <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 border-2 border-indigo-100 shadow-sm space-y-4">
+        <span class="inline-block px-3 py-1 bg-indigo-500 text-white text-xs font-bold rounded-full">Soalan 8</span>
+        <p class="font-bold text-lg text-slate-800">Apakah syarat yang menyebabkan struktur ulangan <code class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded">WHILE</code> terhenti secara automatik?</p>
+
+        <div class="grid grid-cols-1 gap-3">
+          <button onclick="checkInstant('q8', 'A')" class="btn-q8 option-btn text-left p-3.5 rounded-xl bg-emerald-100 border-2 border-emerald-300 text-emerald-900 font-medium">Apabila syarat disemak bernilai FALSE.</button>
+          <button onclick="checkInstant('q8', 'B')" class="btn-q8 option-btn text-left p-3.5 rounded-xl bg-amber-100 border-2 border-amber-300 text-amber-900 font-medium">Apabila syarat disemak bernilai TRUE.</button>
+          <button onclick="checkInstant('q8', 'C')" class="btn-q8 option-btn text-left p-3.5 rounded-xl bg-sky-100 border-2 border-sky-300 text-sky-900 font-medium">Apabila pemboleh ubah bernilai 0 sahaja.</button>
+          <button onclick="checkInstant('q8', 'D')" class="btn-q8 option-btn text-left p-3.5 rounded-xl bg-rose-100 border-2 border-rose-300 text-rose-900 font-medium">Apabila pengguna menekan kekunci Enter.</button>
+        </div>
+        <div id="fb-q8" class="hidden p-4 rounded-xl text-sm font-sans space-y-2"></div>
+      </div>
+
+      <!-- Soalan 9 -->
+      <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 border-2 border-indigo-100 shadow-sm space-y-4">
+        <span class="inline-block px-3 py-1 bg-indigo-500 text-white text-xs font-bold rounded-full">Soalan 9</span>
+        <p class="font-bold text-lg text-slate-800">Antara penyataan berikut, yang manakah BENAR mengenai <code class="bg-indigo-100 text-indigo-700 px-2 py-0.5 rounded">REPEAT-UNTIL</code>?</p>
+
+        <div class="grid grid-cols-1 gap-3">
+          <button onclick="checkInstant('q9', 'A')" class="btn-q9 option-btn text-left p-3.5 rounded-xl bg-emerald-100 border-2 border-emerald-300 text-emerald-900 font-medium">Gelung akan terhenti apabila syarat bernilai TRUE.</button>
+          <button onclick="checkInstant('q9', 'B')" class="btn-q9 option-btn text-left p-3.5 rounded-xl bg-rose-100 border-2 border-rose-300 text-rose-900 font-medium">Gelung akan terhenti apabila syarat bernilai FALSE.</button>
+          <button onclick="checkInstant('q9', 'C')" class="btn-q9 option-btn text-left p-3.5 rounded-xl bg-amber-100 border-2 border-amber-300 text-amber-900 font-medium">Syarat disemak sebelum arahan dilaksanakan.</button>
+          <button onclick="checkInstant('q9', 'D')" class="btn-q9 option-btn text-left p-3.5 rounded-xl bg-sky-100 border-2 border-sky-300 text-sky-900 font-medium">Bilangan ulangan mesti ditetapkan awal.</button>
+        </div>
+        <div id="fb-q9" class="hidden p-4 rounded-xl text-sm font-sans space-y-2"></div>
+      </div>
+
+      <!-- Soalan 10 -->
+      <div class="p-5 sm:p-6 rounded-2xl bg-slate-50 border-2 border-indigo-100 shadow-sm space-y-4">
+        <span class="inline-block px-3 py-1 bg-indigo-500 text-white text-xs font-bold rounded-full">Soalan 10</span>
+        <p class="font-bold text-lg text-slate-800">Teliti pseudokod di bawah:</p>
+        <pre class="bg-slate-900 text-emerald-400 p-4 rounded-xl text-sm font-mono">SET nombor = 1
+WHILE nombor <= 5
+   CETAK "Hello"
+TAMAT WHILE</pre>
+        <p class="font-bold text-slate-800">Apakah ralat logik yang wujud dalam pseudokod di atas?</p>
+
+        <div class="grid grid-cols-1 gap-3">
+          <button onclick="checkInstant('q10', 'A')" class="btn-q10 option-btn text-left p-3.5 rounded-xl bg-rose-100 border-2 border-rose-300 text-rose-900 font-medium">Penggunaan perkataan WHILE adalah salah, sepatutnya REPEAT.</button>
+          <button onclick="checkInstant('q10', 'B')" class="btn-q10 option-btn text-left p-3.5 rounded-xl bg-emerald-100 border-2 border-emerald-300 text-emerald-900 font-medium">Baris SET nombor = nombor + 1 ditinggalkan, menyebabkan gelung berjalan tanpa henti (infinite loop).</button>
+          <button onclick="checkInstant('q10', 'C')" class="btn-q10 option-btn text-left p-3.5 rounded-xl bg-sky-100 border-2 border-sky-300 text-sky-900 font-medium">Nilai awal nombor mestilah bermula dengan 0, bukan 1.</button>
+          <button onclick="checkInstant('q10', 'D')" class="btn-q10 option-btn text-left p-3.5 rounded-xl bg-amber-100 border-2 border-amber-300 text-amber-900 font-medium">Arahan CETAK tidak boleh diletakkan di dalam struktur WHILE.</button>
+        </div>
+        <div id="fb-q10" class="hidden p-4 rounded-xl text-sm font-sans space-y-2"></div>
+      </div>
+
+      <!-- Butang Hantar Keputusan ke Sheet Guru -->
+      <div class="pt-6 border-t-2 border-slate-200 text-center space-y-4">
+        <button id="submitBtn" onclick="submitToSheet()" class="w-full py-4 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-extrabold text-xl rounded-2xl shadow-xl transform hover:-translate-y-1 transition">
+          🚀 HANTAR KEPUTUSAN KE SHEET GURU
+        </button>
+        <div id="statusMsg" class="hidden p-4 rounded-xl text-sm font-bold"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwUgDdp3eAgda4i7nol5typ-g78iCNU3LZQJz676aCv9b_Tc68cQr0mSpP4PmvNJGnRjg/exec';
+
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playCorrectSound() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.3);
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.3);
+    }
+
+    function playWrongSound() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(220, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(110, audioCtx.currentTime + 0.3);
+      gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.3);
+    }
+
+    const answersData = {
+      q1: { ans: "B", solution: "<strong>Jawapan Betul: B</strong><br>FOR = Ulangan Menentu, WHILE = Ulangan Tidak Menentu." },
+      q2: { ans: "A", solution: "<strong>Jawapan Betul: A</strong><br>REPEAT-UNTIL menyemak syarat di akhir gelung." },
+      q3: { ans: "B", solution: "<strong>Jawapan Betul: B</strong><br>Gelung berjalan untuk k = 1, 2, 3 (3 kali)." },
+      q4: { ans: "B", solution: "<strong>Jawapan Betul: B</strong><br>Nilai x bermula 10, 11, 12, 13, 14 (Jumlah: 5 kali ulangan)." },
+      q5: { ans: "B", solution: "<strong>Jawapan Betul: B</strong><br><b>Langkah Penjejakan:</b><br>• Pusingan 1: nombor = 2 ➔ Cetak <b>2</b> ➔ nombor jadi 4<br>• Pusingan 2: nombor = 4 ➔ Cetak <b>4</b> ➔ nombor jadi 6<br>• Pusingan 3: nombor = 6 ➔ Cetak <b>6</b> ➔ nombor jadi 8<br>• Pusingan 4: nombor = 8 (Syarat 8 <= 6 FALSE ➔ Gelung Tamat).<br><b>Output: 2, 4, 6</b>" },
+      q6: { ans: "C", solution: "<strong>Jawapan Betul: C</strong><br>Memasukkan kata laluan ialah ulangan tidak menentu." },
+      q7: { ans: "B", solution: "<strong>Jawapan Betul: B</strong><br>Cetak 5, 4, 3 (terhenti apabila bil = 2)." },
+      q8: { ans: "A", solution: "<strong>Jawapan Betul: A</strong><br>Gelung WHILE terus berulang selagi TRUE dan terhenti apabila syarat bertukar menjadi FALSE." },
+      q9: { ans: "A", solution: "<strong>Jawapan Betul: A</strong><br>REPEAT-UNTIL terhenti apabila syarat bernilai TRUE." },
+      q10: { ans: "B", solution: "<strong>Jawapan Betul: B</strong><br>Tanpa baris penambahnilai (<code>SET nombor = nombor + 1</code>), nilai <code>nombor</code> sentiasa kekal 1. Syarat <code>1 <= 5</code> sentiasa TRUE dan menyebabkan <b>Gelung Tanpa Henti (Infinite Loop)</b>." }
+    };
+
+    let answeredQuestions = {};
+    let totalScore = 0;
+
+    function checkInstant(qId, selectedOption) {
+      if (answeredQuestions[qId]) return;
+
+      const fbDiv = document.getElementById("fb-" + qId);
+      const data = answersData[qId];
+
+      const buttons = document.querySelectorAll(`.btn-${qId}`);
+      buttons.forEach(btn => btn.disabled = true);
+
+      fbDiv.classList.remove("hidden", "bg-emerald-100", "text-emerald-900", "border-emerald-400", "bg-rose-100", "text-rose-900", "border-rose-400");
+      fbDiv.classList.add("border-2");
+
+      if (selectedOption === data.ans) {
+        playCorrectSound();
+        fbDiv.classList.add("bg-emerald-100", "text-emerald-900", "border-emerald-400");
+        fbDiv.innerHTML = `<div><span class="font-bold text-base text-emerald-700">✅ Betul! 🎉</span></div><div>${data.solution}</div>`;
+        totalScore++;
+      } else {
+        playWrongSound();
+        fbDiv.classList.add("bg-rose-100", "text-rose-900", "border-rose-400");
+        fbDiv.innerHTML = `<div><span class="font-bold text-base text-rose-700">❌ Salah!</span></div><div>${data.solution}</div>`;
+      }
+
+      answeredQuestions[qId] = true;
+      document.getElementById("scoreText").innerText = totalScore;
+    }
+
+    function submitToSheet() {
+      const name = document.getElementById("studentName").value.trim();
+      const studentClass = document.getElementById("studentClass").value.trim();
+      const statusMsg = document.getElementById("statusMsg");
+      const submitBtn = document.getElementById("submitBtn");
+
+      if (!name || !studentClass) {
+        alert("Sila isikan Nama dan Kelas terlebih dahulu!");
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerText = "⏳ Sedang Menghantar...";
+      statusMsg.classList.remove("hidden", "bg-red-100", "text-red-800", "bg-green-100", "text-green-800");
+
+      fetch(scriptURL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nama: name,
+          kelas: studentClass,
+          skor: totalScore
+        })
+      })
+      .then(() => {
+        submitBtn.innerText = "✅ TELAH DIHANTAR";
+        statusMsg.classList.add("bg-green-100", "text-green-800");
+        statusMsg.innerHTML = "🎉 Keputusan anda telah berjaya disimpan ke dalam Google Sheet guru!";
+        statusMsg.classList.remove("hidden");
+      })
+      .catch(error => {
+        submitBtn.disabled = false;
+        submitBtn.innerText = "🚀 HANTAR KEPUTUSAN KE SHEET GURU";
+        statusMsg.classList.add("bg-red-100", "text-red-800");
+        statusMsg.innerHTML = "❌ Ralat semasa menghantar! Sila cuba lagi.";
+        statusMsg.classList.remove("hidden");
+      });
+    }
+  </script>
+</body>
+</html>
